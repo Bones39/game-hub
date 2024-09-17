@@ -18,10 +18,20 @@ const GenreList = ({onSelectedGenre}: Props) => {
 		return <Spinner/>;
 	}
 
+	let sortedData = [...data];
+	sortedData.sort((genre1, genre2) => {
+		if (genre1.name < genre2.name) {
+			return -1;
+		}
+		if (genre1.name > genre2.name) {
+			return 1;
+		}
+		return 0;
+	})
 
 	return(
 		<List>
-			{data.map(genre => <ListItem key={genre.id} paddingY='4px'>
+			{sortedData.map(genre => <ListItem key={genre.id} paddingY='4px'>
 				<HStack>
 					<Image boxSize='30px' borderRadius={8} src={getCroppedImageUrl(genre.image_background)}/>
 					<Button variant="link" onClick={()=>onSelectedGenre(genre)}>{genre.name}</Button>
