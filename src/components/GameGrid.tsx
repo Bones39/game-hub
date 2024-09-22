@@ -1,4 +1,4 @@
-import { SimpleGrid, Skeleton } from "@chakra-ui/react";
+import { HStack, SimpleGrid, Skeleton } from "@chakra-ui/react";
 import useGames, { Platform } from "../hooks/useGames";
 import GameCard from "./GameCard";
 import GameCardSkeleton from "./GameCardSkeleton";
@@ -6,6 +6,7 @@ import GameCardContainer from "./GameCardContainer";
 import PlateformSelector from "./PlatformSelector";
 import { Genre } from "../hooks/useGenres";
 import { useState } from "react";
+import SortSelector from "./SortSelector";
 
 interface Props {
 	selectedGenre: Genre | null;
@@ -13,14 +14,18 @@ interface Props {
 
 const GameGrid = ({selectedGenre}: Props)	=> {
 	const [selectedPlatform, setSelectedPlatform] = useState<Platform | null>(null);
+	const [selectedSortOrder, setSelectedSortOrder] = useState('');
 
-	const {data, error, isLoading} = useGames(selectedGenre, selectedPlatform);
+	const {data, error, isLoading} = useGames(selectedGenre, selectedPlatform, selectedSortOrder);
 	const skeletons = [1,2,3,4,5,6];
 
 
 	return (
 		<>
-			<PlateformSelector selectedPlatform={selectedPlatform} onSelectPlatform={(platform) => setSelectedPlatform(platform)}  />
+			<HStack>
+				<PlateformSelector selectedPlatform={selectedPlatform} onSelectPlatform={(platform) => setSelectedPlatform(platform)}  />
+				<SortSelector selectedSortOrder={selectedSortOrder} onSelectSortOrder={(sortOrder)=> {console.log(sortOrder); setSelectedSortOrder(sortOrder)}}/>
+			</HStack>
 			{error && <p>{error}</p>}
 			<SimpleGrid columns={{sm: 1, md: 2, lg: 3, xl: 5}} padding='10px' spacing={3}>
 				{isLoading && skeletons.map(skeleton => (
