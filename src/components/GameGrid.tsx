@@ -24,7 +24,7 @@ const GameGrid = ({selectedGenre}: Props)	=> {
 		<>
 			<HStack>
 				<PlateformSelector selectedPlatform={selectedPlatform} onSelectPlatform={(platform) => setSelectedPlatform(platform)}  />
-				<SortSelector selectedSortOrder={selectedSortOrder} onSelectSortOrder={(sortOrder)=> {console.log(sortOrder); setSelectedSortOrder(sortOrder)}}/>
+				<SortSelector selectedSortOrder={selectedSortOrder} onSelectSortOrder={(sortOrder)=> {setSelectedSortOrder(sortOrder)}}/>
 			</HStack>
 			{error && <p>{error}</p>}
 			<SimpleGrid columns={{sm: 1, md: 2, lg: 3, xl: 5}} padding='10px' spacing={3}>
