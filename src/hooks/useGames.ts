@@ -18,17 +18,18 @@ export interface Game {
 	metacritic: number;
 }
 
-const useGames = (selectedGenre: Genre | null, selectedPlatform: Platform | null, selectedSortOrder: string) => useData<Game>
+const useGames = (selectedGenre: Genre | null, selectedPlatform: Platform | null, selectedSortOrder: string, searchInputText: string) => useData<Game>
 	(
 		'/games',
 		{
 			params: {
 				genres: selectedGenre?.id,
 				platforms: selectedPlatform?.id,
-				ordering: selectedSortOrder
+				ordering: selectedSortOrder,
+				search: searchInputText
 			}
 		},
-		[selectedGenre?.id, selectedPlatform?.id, selectedSortOrder] /** Array of dependencies */
+		[selectedGenre?.id, selectedPlatform?.id, selectedSortOrder, searchInputText] /** Array of dependencies */
 	);
 
 export default useGames;

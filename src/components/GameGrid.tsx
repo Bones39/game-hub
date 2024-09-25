@@ -10,13 +10,14 @@ import SortSelector from "./SortSelector";
 
 interface Props {
 	selectedGenre: Genre | null;
+	searchInputText: string;
 }
 
-const GameGrid = ({selectedGenre}: Props)	=> {
+const GameGrid = ({selectedGenre, searchInputText}: Props)	=> {
 	const [selectedPlatform, setSelectedPlatform] = useState<Platform | null>(null);
 	const [selectedSortOrder, setSelectedSortOrder] = useState('');
 
-	const {data, error, isLoading} = useGames(selectedGenre, selectedPlatform, selectedSortOrder);
+	const {data, error, isLoading} = useGames(selectedGenre, selectedPlatform, selectedSortOrder, searchInputText);
 	const skeletons = [1,2,3,4,5,6];
 
 

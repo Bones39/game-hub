@@ -9,6 +9,7 @@ import { Genre } from './hooks/useGenres';
 function App() {
 
 	const [selectedGenre, setSelectedGenre] = useState<Genre | null>(null);
+	const [searchInputText, setSearchInputText] = useState("");
 
   return (
 	<Grid templateAreas={
@@ -25,7 +26,7 @@ function App() {
 	}
 	>
 		<GridItem area="nav">
-			<NavBar/>
+			<NavBar onSearch={(searchText) => setSearchInputText(searchText)}/>
 		</GridItem>
 		<Show above='lg'>
 			<GridItem area="aside" paddingX='20px'>
@@ -33,7 +34,7 @@ function App() {
 			</GridItem>
 		</Show>
 		<GridItem area="main">
-			<GameGrid selectedGenre={selectedGenre}/>
+			<GameGrid selectedGenre={selectedGenre} searchInputText={searchInputText}/>
 		</GridItem>
 	</Grid>
   )
