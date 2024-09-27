@@ -1,5 +1,6 @@
 import useData from "./useData";
 import { GameQueryFromApp } from "../App";
+import { GameQueryFromGrid } from "../components/GameGrid";
 
 export interface Platform {
 	id: number;
@@ -15,18 +16,18 @@ export interface Game {
 	metacritic: number;
 }
 
-const useGames = (gameQueryFromApp: GameQueryFromApp, selectedPlatform: Platform | null, selectedSortOrder: string) => useData<Game>
+const useGames = (gameQueryFromApp: GameQueryFromApp, gameQueryFromGrid: GameQueryFromGrid) => useData<Game>
 	(
 		'/games',
 		{
 			params: {
 				genres: gameQueryFromApp.genre?.id,
-				platforms: selectedPlatform?.id,
-				ordering: selectedSortOrder,
+				platforms: gameQueryFromGrid.platform?.id,
+				ordering: gameQueryFromGrid.sortOrdera,
 				search: gameQueryFromApp.searchInput
 			}
 		},
-		[gameQueryFromApp, selectedPlatform?.id, selectedSortOrder] /** Array of dependencies */
+		[gameQueryFromApp, gameQueryFromGrid] /** Array of dependencies */
 	);
 
 export default useGames;

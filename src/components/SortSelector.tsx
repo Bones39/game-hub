@@ -2,7 +2,7 @@ import { ChevronDownIcon } from "@chakra-ui/icons";
 import { Menu, MenuButton, Button, MenuList, MenuItem } from "@chakra-ui/react";
 
 interface Props {
-	onSelectSortOrder: (sortOrder: string) => void;
+	onSelectSortOrder: (sortOrderb: string) => void;
 	selectedSortOrder: string
 }
 

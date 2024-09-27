@@ -13,19 +13,24 @@ interface Props {
 	gameQuery: GameQueryFromApp;
 }
 
-const GameGrid = ({gameQuery}: Props)	=> {
-	const [selectedPlatform, setSelectedPlatform] = useState<Platform | null>(null);
-	const [selectedSortOrder, setSelectedSortOrder] = useState('');
+export interface GameQueryFromGrid {
+	platform: Platform | null;
+	sortOrdera: string;
+}
 
-	const {data, error, isLoading} = useGames(gameQuery, selectedPlatform, selectedSortOrder);
+const GameGrid = ({gameQuery}: Props)	=> {
+
+	const [gameQueryFromGrid, setGameQueryFromGrid] = useState({} as GameQueryFromGrid);
+
+	const {data, error, isLoading} = useGames(gameQuery, gameQueryFromGrid);
 	const skeletons = [1,2,3,4,5,6];
 
 
 	return (
 		<>
 			<HStack>
-				<PlateformSelector selectedPlatform={selectedPlatform} onSelectPlatform={(platform) => setSelectedPlatform(platform)}  />
-				<SortSelector selectedSortOrder={selectedSortOrder} onSelectSortOrder={(sortOrder)=> {setSelectedSortOrder(sortOrder)}}/>
+				<PlateformSelector selectedPlatform={gameQueryFromGrid.platform} onSelectPlatform={(platform) => setGameQueryFromGrid({...gameQueryFromGrid, platform})}  />
+				<SortSelector selectedSortOrder={gameQueryFromGrid.sortOrdera} onSelectSortOrder={(sortOrdera)=> setGameQueryFromGrid({...gameQueryFromGrid, sortOrdera})}/>
 			</HStack>
 			{error && <p>{error}</p>}
 			<SimpleGrid columns={{sm: 1, md: 2, lg: 3, xl: 5}} padding='10px' spacing={3}>
