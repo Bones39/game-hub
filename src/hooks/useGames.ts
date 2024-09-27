@@ -1,8 +1,5 @@
-import { useEffect, useState } from "react";
-import apiClient from "../services/api-client";
-import { CanceledError } from "axios";
 import useData from "./useData";
-import { Genre } from "./useGenres";
+import { GameQueryFromApp } from "../App";
 
 export interface Platform {
 	id: number;
@@ -18,18 +15,18 @@ export interface Game {
 	metacritic: number;
 }
 
-const useGames = (selectedGenre: Genre | null, selectedPlatform: Platform | null, selectedSortOrder: string, searchInputText: string) => useData<Game>
+const useGames = (gameQueryFromApp: GameQueryFromApp, selectedPlatform: Platform | null, selectedSortOrder: string) => useData<Game>
 	(
 		'/games',
 		{
 			params: {
-				genres: selectedGenre?.id,
+				genres: gameQueryFromApp.genre?.id,
 				platforms: selectedPlatform?.id,
 				ordering: selectedSortOrder,
-				search: searchInputText
+				search: gameQueryFromApp.searchInput
 			}
 		},
-		[selectedGenre?.id, selectedPlatform?.id, selectedSortOrder, searchInputText] /** Array of dependencies */
+		[gameQueryFromApp, selectedPlatform?.id, selectedSortOrder] /** Array of dependencies */
 	);
 
 export default useGames;

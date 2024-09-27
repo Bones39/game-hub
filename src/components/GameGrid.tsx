@@ -7,17 +7,17 @@ import PlateformSelector from "./PlatformSelector";
 import { Genre } from "../hooks/useGenres";
 import { useState } from "react";
 import SortSelector from "./SortSelector";
+import { GameQueryFromApp } from "../App";
 
 interface Props {
-	selectedGenre: Genre | null;
-	searchInputText: string;
+	gameQuery: GameQueryFromApp;
 }
 
-const GameGrid = ({selectedGenre, searchInputText}: Props)	=> {
+const GameGrid = ({gameQuery}: Props)	=> {
 	const [selectedPlatform, setSelectedPlatform] = useState<Platform | null>(null);
 	const [selectedSortOrder, setSelectedSortOrder] = useState('');
 
-	const {data, error, isLoading} = useGames(selectedGenre, selectedPlatform, selectedSortOrder, searchInputText);
+	const {data, error, isLoading} = useGames(gameQuery, selectedPlatform, selectedSortOrder);
 	const skeletons = [1,2,3,4,5,6];
 
 

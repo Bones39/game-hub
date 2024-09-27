@@ -6,10 +6,13 @@ import GenreList from './components/GenreList';
 import { useState } from 'react';
 import { Genre } from './hooks/useGenres';
 
+export interface GameQueryFromApp {
+	genre: Genre | null;
+	searchInput: string;
+}
 function App() {
 
-	const [selectedGenre, setSelectedGenre] = useState<Genre | null>(null);
-	const [searchInputText, setSearchInputText] = useState("");
+	const [GameQueryFromApp, setGameQueryFromApp] = useState<GameQueryFromApp>({} as GameQueryFromApp);
 
   return (
 	<Grid templateAreas={
@@ -26,15 +29,15 @@ function App() {
 	}
 	>
 		<GridItem area="nav">
-			<NavBar onSearch={(searchText) => setSearchInputText(searchText)}/>
+			<NavBar onSearch={(searchInput) => setGameQueryFromApp({...GameQueryFromApp, searchInput})}/>
 		</GridItem>
 		<Show above='lg'>
 			<GridItem area="aside" paddingX='20px'>
-				<GenreList selectedGenre={selectedGenre} onSelectedGenre={(genre) => setSelectedGenre(genre)}/>
+				<GenreList selectedGenre={GameQueryFromApp.genre} onSelectedGenre={(genre) => setGameQueryFromApp({...GameQueryFromApp, genre})}/>
 			</GridItem>
 		</Show>
 		<GridItem area="main">
-			<GameGrid selectedGenre={selectedGenre} searchInputText={searchInputText}/>
+			<GameGrid gameQuery={GameQueryFromApp}/>
 		</GridItem>
 	</Grid>
   )
