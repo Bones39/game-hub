@@ -14,6 +14,7 @@ export interface Game {
 	background_image: string;
 	parent_platforms: {platform: Platform}[];
 	metacritic: number;
+	released: string;
 }
 
 const useGames = (gameQueryFromApp: GameQueryFromApp, gameQueryFromGrid: GameQueryFromGrid) => useData<Game>
