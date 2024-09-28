@@ -35,7 +35,7 @@ const GenreList = ({selectedGenre, onSelectedGenre}: Props) => {
 			<Button onClick={()=>onSelectedGenre(null)}>reset filter</Button>
 			{sortedData.map(genre => <ListItem key={genre.id} paddingY='4px'>
 				<HStack>
-					<Image boxSize='30px' borderRadius={8} src={getCroppedImageUrl(genre.image_background)}/>
+					<Image objectFit='cover' boxSize='30px' borderRadius={8} src={getCroppedImageUrl(genre.image_background)}/>
 					<Button fontWeight={genre.id === selectedGenre?.id ? "bold" : ""} color={genre.id === selectedGenre?.id ? "lightblue" : ""} variant="link" onClick={()=>onSelectedGenre(genre)}>{genre.name}</Button>
 				</HStack>
 			</ListItem>)}
