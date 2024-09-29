@@ -1,4 +1,4 @@
-import { Box, HStack, SimpleGrid, Skeleton } from "@chakra-ui/react";
+import { Box, HStack, SimpleGrid, Text } from "@chakra-ui/react";
 import useGames, { Platform } from "../hooks/useGames";
 import GameCard from "./GameCard";
 import GameCardSkeleton from "./GameCardSkeleton";
@@ -26,6 +26,7 @@ const GameGrid = ({gameQuery}: Props)	=> {
 	const {data, error, isLoading} = useGames(gameQuery, gameQueryFromGrid);
 	const skeletons = [1,2,3,4,5,6];
 
+	if (error) <Text>{error}</Text>;
 
 	return (
 		<>
@@ -36,7 +37,6 @@ const GameGrid = ({gameQuery}: Props)	=> {
 					<SortSelector selectedSortOrder={gameQueryFromGrid.sortOrdera} onSelectSortOrder={(sortOrdera)=> setGameQueryFromGrid({...gameQueryFromGrid, sortOrdera})}/>
 				</HStack>
 			</Box>
-			{error && <p>{error}</p>}
 			<SimpleGrid columns={{sm: 1, md: 2, lg: 3, xl: 5}} padding='10px' spacing={3}>
 				{isLoading && skeletons.map(skeleton => (
 					<GameCardContainer key={skeleton}>
