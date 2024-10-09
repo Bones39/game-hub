@@ -1,15 +1,18 @@
 
-import { Center, HStack, List, ListItem } from "@chakra-ui/react";
+import { Button, List, ListItem } from "@chakra-ui/react";
 
 interface Props {
-	
+	onSelectPage: (value: number) => void;
+	selectedPage: Number;
 }
 
-const PageSelector = () => {
+const PageSelector = ({selectedPage, onSelectPage}: Props) => {
 	const a = ["1", "2", "3", "4"];
 	return (
-		<List alignItems="Center" display="flex">
-			{a.map(value => <ListItem key={value}>{value}</ListItem>)}
+		<List display="flex" justifyContent="space-between">
+			{a.map(value => <ListItem key={value}>
+				<Button onClick={() => onSelectPage(parseInt(value))}>{value}</Button>
+			</ListItem>)}
 		</List>
 	);
 }

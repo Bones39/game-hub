@@ -10,6 +10,7 @@ import { Genre } from './hooks/useGenres';
 export interface GameQueryFromApp {
 	genre: Genre | null;
 	searchInput: string;
+	page: Number;
 }
 function App() {
 
@@ -39,7 +40,7 @@ function App() {
 		</Show>
 		<GridItem area="main">
 			<GameGrid gameQuery={GameQueryFromApp}/>
-			<PageSelector></PageSelector>
+			<PageSelector selectedPage={GameQueryFromApp.page || 1} onSelectPage={(page) => setGameQueryFromApp({...GameQueryFromApp, page})}></PageSelector>
 		</GridItem>
 	</Grid>
   )

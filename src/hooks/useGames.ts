@@ -25,7 +25,8 @@ const useGames = (gameQueryFromApp: GameQueryFromApp, gameQueryFromGrid: GameQue
 				genres: gameQueryFromApp.genre?.id,
 				platforms: gameQueryFromGrid.platform?.id,
 				ordering: gameQueryFromGrid.sortOrdera,
-				search: gameQueryFromApp.searchInput
+				search: gameQueryFromApp.searchInput,
+				page: gameQueryFromApp.page
 			}
 		},
 		[gameQueryFromApp, gameQueryFromGrid] /** Array of dependencies */
