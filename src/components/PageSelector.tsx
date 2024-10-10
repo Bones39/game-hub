@@ -9,9 +9,9 @@ interface Props {
 const PageSelector = ({selectedPage, onSelectPage}: Props) => {
 	const a = ["1", "2", "3", "4"];
 	return (
-		<List display="flex" justifyContent="space-between">
+		<List display="flex" justifyContent="center">
 			{a.map(value => <ListItem key={value}>
-				<Button onClick={() => onSelectPage(parseInt(value))}>{value}</Button>
+				<Button bgColor={parseInt(value) === selectedPage? "LightGray" : ""} color={parseInt(value) === selectedPage? "SlateGray" : ""} onClick={() => onSelectPage(parseInt(value))}>{value}</Button>
 			</ListItem>)}
 		</List>
 	);
