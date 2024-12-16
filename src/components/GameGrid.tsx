@@ -4,7 +4,7 @@ import GameCard from "./GameCard";
 import GameCardSkeleton from "./GameCardSkeleton";
 import GameCardContainer from "./GameCardContainer";
 import PlateformSelector from "./PlatformSelector";
-import { Genre } from "../hooks/useGenres";
+import { Game } from "../hooks/useGames";
 import { useState } from "react";
 import SortSelector from "./SortSelector";
 import { GameQueryFromApp } from "../App";
@@ -43,7 +43,7 @@ const GameGrid = ({gameQuery}: Props)	=> {
 						<GameCardSkeleton/>
 					</GameCardContainer>
 				))}
-				{data?.results.map(game => (
+				{data?.results.map((game: Game) => (
 					<GameCardContainer key={game.id}>
 						<GameCard game={game} /> 
 					</GameCardContainer>
