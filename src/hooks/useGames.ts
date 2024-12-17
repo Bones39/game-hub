@@ -1,7 +1,7 @@
 import useData ,{ FectResponse } from "./useData";
 import { GameQueryFromApp } from "../App";
 import { GameQueryFromGrid } from "../components/GameGrid";
-import { useQuery } from "@tanstack/react-query";
+import { useInfiniteQuery } from "@tanstack/react-query";
 import apiClient from "../services/api-client";
 
 export interface Platform {
@@ -19,16 +19,19 @@ export interface Game {
 	released: string;
 }
 
-const useGames = (gameQueryFromApp: GameQueryFromApp, gameQueryFromGrid: GameQueryFromGrid) => useQuery<FectResponse<Game>, Error>({
+const useGames = (gameQueryFromApp: GameQueryFromApp, gameQueryFromGrid: GameQueryFromGrid) => useInfiniteQuery<FectResponse<Game>, Error>({
 	queryKey: ['games', gameQueryFromApp, gameQueryFromGrid],
-	queryFn: () => apiClient.get<FectResponse<Game>>('/games', {params: {
+	queryFn: ({ pageParam = 1 }) => apiClient.get<FectResponse<Game>>('/games', {params: {
 		genres: gameQueryFromApp.genre?.id,
 		parent_platforms: gameQueryFromGrid.platform?.id,
 		ordering: gameQueryFromGrid.sortOrdera,
 		search: gameQueryFromApp.searchInput,
-		page: gameQueryFromApp.page}
+		page: pageParam}
 	})
-	.then(res => res.data)
+	.then(res => res.data),
+	getNextPageParam: (lastPage, allPages) => {
+		return lastPage.next ? allPages.length + 1 : undefined ;
+	}
 })
 // const useGames = (gameQueryFromApp: GameQueryFromApp, gameQueryFromGrid: GameQueryFromGrid) => useData<Game>
 // 	(

@@ -40,7 +40,7 @@ function App() {
 		</Show>
 		<GridItem area="main">
 			<GameGrid gameQuery={GameQueryFromApp}/>
-			<PageSelector selectedPage={GameQueryFromApp.page || 1} onSelectPage={(page) => setGameQueryFromApp({...GameQueryFromApp, page})}></PageSelector>
+			{/* <PageSelector selectedPage={GameQueryFromApp.page || 1} onSelectPage={(page) => setGameQueryFromApp({...GameQueryFromApp, page})}></PageSelector> */}
 		</GridItem>
 	</Grid>
   )

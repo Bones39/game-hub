@@ -4,6 +4,7 @@ import { AxiosRequestConfig, CanceledError } from "axios";
 
 export interface FectResponse<T> {
 	count: number;
+	next: string | null;
 	results: T[];
 }
 

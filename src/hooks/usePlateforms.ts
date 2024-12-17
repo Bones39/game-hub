@@ -3,7 +3,7 @@ import useData from "./useData";
 import { Platform } from "./useGames";
 import apiClient from "../services/api-client";
 
-// still using useData here instead of reactQuery (linked to video 25) so have both methods in case of inspiration needed
+// still using useData here instead of reactQuery (linked to fetching plateform video) so have both methods in case of inspiration needed
 const usePlatforms = () => useData<Platform>('/platforms/lists/parents');
 
 /* const usePlatforms = () => useQuery({
