@@ -1,8 +1,8 @@
-import useData ,{ FectResponse } from "./useData";
+import { useInfiniteQuery } from "@tanstack/react-query";
 import { GameQueryFromApp } from "../App";
 import { GameQueryFromGrid } from "../components/GameGrid";
-import { useInfiniteQuery } from "@tanstack/react-query";
 import apiClient from "../services/api-client";
+import { FectResponse } from "./useData";
 
 export interface Platform {
 	id: number;
@@ -31,7 +31,8 @@ const useGames = (gameQueryFromApp: GameQueryFromApp, gameQueryFromGrid: GameQue
 	.then(res => res.data),
 	getNextPageParam: (lastPage, allPages) => {
 		return lastPage.next ? allPages.length + 1 : undefined ;
-	}
+	},
+	staleTime: 24 * 60 * 60 * 1000 //24h
 })
 // const useGames = (gameQueryFromApp: GameQueryFromApp, gameQueryFromGrid: GameQueryFromGrid) => useData<Game>
 // 	(
