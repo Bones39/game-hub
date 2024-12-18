@@ -8,7 +8,7 @@ import { useState } from 'react';
 import { Genre } from './hooks/useGenres';
 
 export interface GameQueryFromApp {
-	genre: Genre | null;
+	genreId?: number;
 	searchInput: string;
 	page: Number;
 }
@@ -35,7 +35,7 @@ function App() {
 		</GridItem>
 		<Show above='lg'>
 			<GridItem area="aside" paddingX='20px'>
-				<GenreList selectedGenre={GameQueryFromApp.genre} onSelectedGenre={(genre) => setGameQueryFromApp({...GameQueryFromApp, genre})}/>
+				<GenreList selectedGenreId={GameQueryFromApp.genreId} onSelectedGenre={(genre) => setGameQueryFromApp({...GameQueryFromApp, genreId: genre?.id})}/>
 			</GridItem>
 		</Show>
 		<GridItem area="main">

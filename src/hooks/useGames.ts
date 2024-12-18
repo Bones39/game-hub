@@ -22,7 +22,7 @@ export interface Game {
 const useGames = (gameQueryFromApp: GameQueryFromApp, gameQueryFromGrid: GameQueryFromGrid) => useInfiniteQuery<FectResponse<Game>, Error>({
 	queryKey: ['games', gameQueryFromApp, gameQueryFromGrid],
 	queryFn: ({ pageParam = 1 }) => apiClient.get<FectResponse<Game>>('/games', {params: {
-		genres: gameQueryFromApp.genre?.id,
+		genres: gameQueryFromApp.genreId,
 		parent_platforms: gameQueryFromGrid.platform?.id,
 		ordering: gameQueryFromGrid.sortOrdera,
 		search: gameQueryFromApp.searchInput,
@@ -34,19 +34,5 @@ const useGames = (gameQueryFromApp: GameQueryFromApp, gameQueryFromGrid: GameQue
 	},
 	staleTime: 24 * 60 * 60 * 1000 //24h
 })
-// const useGames = (gameQueryFromApp: GameQueryFromApp, gameQueryFromGrid: GameQueryFromGrid) => useData<Game>
-// 	(
-// 		'/games',
-// 		{
-// 			params: {
-// 				genres: gameQueryFromApp.genre?.id,
-// 				platforms: gameQueryFromGrid.platform?.id,
-// 				ordering: gameQueryFromGrid.sortOrdera,
-// 				search: gameQueryFromApp.searchInput,
-// 				page: gameQueryFromApp.page
-// 			}
-// 		},
-// 		[gameQueryFromApp, gameQueryFromGrid] /** Array of dependencies */
-// 	);
 
 export default useGames;
